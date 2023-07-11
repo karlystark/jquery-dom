@@ -74,7 +74,49 @@
 </div>
 <script src="https://unpkg.com/jquery"></script>
 <script>
-  // Add your code here!
+
+//add a class of image-center to the images in the article tag
+  $("article > img").addClass("image-center"); // 1
+
+//remove the last paragraph element of the article
+  $("p:last-child").remove(); //2
+
+//font size of h1 element becomes random size between 0 and 100
+  function randomSize(){
+    return Math.floor(Math.random() * 101);
+  }
+
+  $("h1").css("font-size", randomSize); //3
+
+//add a new list item to the ordered list
+  $("ol").append("<li> that puppy's in a cup! *sob* </li>"); //4
+
+//empty the aside and put new p in it apologizing for its existence
+  $("aside").empty().append("<p> sorry this list ever existed, honestly</p>"); //5
+
+//when you change the numbers in the three inputs on the bottom, the background
+//color of the body should change to match whatever the three vals in the inputs are
+// hint: the change event is triggered when the val of input changes
+function changeColor(){
+  let red = Number($("input").eq(0).val());
+  let blue = Number($("input").eq(1).val());
+  let green = Number($("input").eq(2).val());
+
+  $("body").css("background-color", `rgb(${red}, ${green}, ${blue})`);
+}
+
+$("input").on("input keyup", changeColor);
+
+//add event listener so that when you click on the image, it is removed from the DOM
+
+function deleteImg(evt) {
+ // $(evt.target).remove(); => to only delete the element clicked on
+  let $img = $("img");
+  $img.remove();
+}
+
+$("article").on("click", "img", deleteImg);
+
 </script>
 </body>
 
